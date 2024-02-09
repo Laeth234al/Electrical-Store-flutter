@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:store_app/Controller/cart_controller.dart';
 import 'package:store_app/Helper/color_helper.dart';
 import 'package:store_app/Helper/padding_helper.dart';
 import 'package:store_app/Models/product.dart';
@@ -11,7 +13,20 @@ class DetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: HelperColor.primaryColor,
+      // backgroundColor: HelperColor.primaryColor,
+      floatingActionButton: GetBuilder<CartController>(
+        builder: (cartController) => FloatingActionButton(
+          onPressed: () {
+            print('add to Cart');
+            cartController.addToCart(product);
+          },
+          backgroundColor: HelperColor.secondaryColor,
+          child: const Icon(
+            Icons.shopping_cart_checkout,
+            color: Colors.white,
+          ),
+        ),
+      ),
       appBar: AppBar(
         backgroundColor: HelperColor.backgroundColor,
         elevation: 0.0,
@@ -22,7 +37,7 @@ class DetailsScreen extends StatelessWidget {
         leading: IconButton(
           padding: const EdgeInsets.only(right: HelperPadding.defaultPadding),
           onPressed: () {
-            Navigator.pop(context);
+            Get.back();
           },
           icon: const Icon(
             Icons.arrow_back,

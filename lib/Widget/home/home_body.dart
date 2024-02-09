@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:store_app/Controller/product_controller.dart';
 import 'package:store_app/Helper/color_helper.dart';
 import 'package:store_app/Helper/padding_helper.dart';
-import 'package:store_app/Models/product.dart';
 import 'package:store_app/Widget/home/product_card.dart';
-import 'package:store_app/screens/details_screen.dart';
+import 'package:store_app/View/details_screen.dart';
 
 class HomeBody extends StatelessWidget {
-  const HomeBody({super.key});
+  HomeBody({super.key});
+  final ProductController productController = Get.find<ProductController>();
 
   @override
   Widget build(BuildContext context) {
@@ -29,17 +31,12 @@ class HomeBody extends StatelessWidget {
                   ),
                 ),
                 ListView.builder(
-                  itemCount: products.length,
+                  itemCount: productController.products.length,
                   itemBuilder: (context, index) => ProductCard(
                     itemIndex: index,
-                    product: products[index],
+                    product: productController.products[index],
                     press: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => DetailsScreen(product: products[index]),
-                        ),
-                      );
+                      Get.to(() => DetailsScreen(product: productController.products[index]));
                     },
                   ),
                 ),

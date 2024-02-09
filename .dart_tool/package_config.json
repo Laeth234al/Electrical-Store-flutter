@@ -68,6 +68,12 @@
       "languageVersion": "3.2"
     },
     {
+      "name": "get",
+      "rootUri": "file:///C:/Users/Lenovo/AppData/Local/Pub/Cache/hosted/pub.dev/get-4.6.6",
+      "packageUri": "lib/",
+      "languageVersion": "2.15"
+    },
+    {
       "name": "intl",
       "rootUri": "file:///C:/Users/Lenovo/AppData/Local/Pub/Cache/hosted/pub.dev/intl-0.18.1",
       "packageUri": "lib/",
@@ -164,7 +170,7 @@
       "languageVersion": "3.1"
     }
   ],
-  "generated": "2024-02-07T23:27:10.160175Z",
+  "generated": "2024-02-08T22:18:02.651209Z",
   "generator": "pub",
   "generatorVersion": "3.2.3"
 }
