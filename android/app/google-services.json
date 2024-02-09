@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "167584664566",
+    "project_id": "electrical-store-c002f",
+    "storage_bucket": "electrical-store-c002f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:167584664566:android:6c89e120cdcc155a9b15d7",
+        "android_client_info": {
+          "package_name": "com.example.store_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCKGdc-j74UEdu6MSBjwr4KJi8yEwiwXs0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

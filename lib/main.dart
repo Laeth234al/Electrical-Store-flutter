@@ -1,16 +1,22 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:store_app/Controller/Binding/auth_binding.dart';
 import 'package:store_app/Controller/Binding/home_binding.dart';
 import 'package:store_app/Helper/color_helper.dart';
-// ignore: depend_on_referenced_packages
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:store_app/View/cart_screen.dart';
 import 'package:store_app/View/home_screen.dart';
 import 'package:store_app/View/register_screen.dart';
 import 'package:store_app/View/sign_in_screen.dart';
+import 'package:store_app/firebase_options.dart';
+// ignore: depend_on_referenced_packages
+import 'package:flutter_localizations/flutter_localizations.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const StoreApp());
 }
 
@@ -39,7 +45,7 @@ class StoreApp extends StatelessWidget {
         GetPage(name: '/', page: () => SignInScreen(), binding: AuthBinding()),
         GetPage(name: '/register', page: () => RegisterScreen(), binding: AuthBinding()),
         GetPage(name: '/home', page: () => const HomeScreen(), binding: ProductBinding()),
-        GetPage(name: '/cart', page: () => CartScreen()),
+        GetPage(name: '/cart', page: () => const CartScreen()),
         // ...other routes
       ],
     );
