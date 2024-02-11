@@ -11,12 +11,15 @@ import 'package:store_app/View/sign_in_screen.dart';
 import 'package:store_app/firebase_options.dart';
 // ignore: depend_on_referenced_packages
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:store_app/services/auth_service.dart';
 
+late bool isLogin;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  isLogin = await AuthServic.isLogin();
   runApp(const StoreApp());
 }
 
@@ -40,7 +43,7 @@ class StoreApp extends StatelessWidget {
       ],
       supportedLocales: const [Locale("ar", "AE")],
       locale: const Locale("ar", "AE"),
-      initialRoute: '/',
+      initialRoute: isLogin ? '/home' : '/',
       getPages: [
         GetPage(name: '/', page: () => SignInScreen(), binding: AuthBinding()),
         GetPage(name: '/register', page: () => RegisterScreen(), binding: AuthBinding()),

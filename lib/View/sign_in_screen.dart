@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:store_app/Controller/auth_controller.dart';
@@ -105,39 +107,46 @@ class SignInScreen extends StatelessWidget {
                         },
                       ),
                       const SizedBox(height: 20.0),
-                      InkWell(
-                        child: Container(
-                          height: 50.0,
-                          margin: const EdgeInsets.symmetric(horizontal: 50.0),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(50.0),
-                            // color: Colors.blueAccent[700]!,
-                            gradient: const LinearGradient(
-                              begin: Alignment.topLeft,
-                              colors: [
-                                HelperColor.primaryColor,
-                                HelperColor.blueColor,
-                              ],
-                            ),
-                          ),
-                          child: const Center(
-                            child: Text(
-                              'Login',
-                              style: TextStyle(
-                                fontSize: 18.0,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
+                      GetBuilder<AuthController>(
+                        builder: (c) => InkWell(
+                          child: c.isLoading
+                              ? const Center(child: CircularProgressIndicator())
+                              : Container(
+                                  height: 50.0,
+                                  margin: const EdgeInsets.symmetric(horizontal: 50.0),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(50.0),
+                                    gradient: const LinearGradient(
+                                      begin: Alignment.topLeft,
+                                      colors: [
+                                        HelperColor.primaryColor,
+                                        HelperColor.blueColor,
+                                      ],
+                                    ),
+                                  ),
+                                  child: const Center(
+                                    child: Text(
+                                      'Login',
+                                      style: TextStyle(
+                                        fontSize: 18.0,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                          onTap: () async {
+                            print('Login Button');
+                            if (authController.isVaildForSignIn) {
+                              print('valid for login');
+                              c.changeLoading();
+                              var v = await authController.login();
+                              c.changeLoading();
+                              if (v) Get.offNamed('/home');
+                            } else {
+                              print('not valid for login');
+                            }
+                          },
                         ),
-                        onTap: () {
-                          print('Login Button');
-                          if (authController.isVaildForSignIn)
-                            print('valid for login');
-                          else
-                            print('not valid for login');
-                          Get.offNamed('/home');
-                        },
                       ),
                       const SizedBox(height: 50.0),
                       const Center(

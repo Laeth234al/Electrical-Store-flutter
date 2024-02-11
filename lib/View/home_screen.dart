@@ -1,8 +1,11 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:store_app/Helper/color_helper.dart';
 import 'package:store_app/Widget/home/drawer_item.dart';
 import 'package:store_app/Widget/home/home_body.dart';
+import 'package:store_app/services/auth_service.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -60,8 +63,10 @@ class HomeScreen extends StatelessWidget {
             DrawerItem(
               title: 'تسجيل الخروج',
               icon: Icons.logout,
-              onTap: () {
+              onTap: () async {
                 print('log out');
+                await AuthServic.signOut();
+                print('log out111');
                 Get.offAllNamed('/');
               },
             ),

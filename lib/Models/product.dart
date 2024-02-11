@@ -1,5 +1,5 @@
 class Product {
-  final int id;
+  final String id;
   final double price;
   final String title, subTitle, description, image;
   Product({

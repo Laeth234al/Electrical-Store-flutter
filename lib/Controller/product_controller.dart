@@ -2,9 +2,15 @@ import 'package:get/get.dart';
 import 'package:store_app/Models/product.dart';
 
 class ProductController extends GetxController {
+  @override
+  void onInit() {
+    // firestor service
+    super.onInit();
+  }
+
   List<Product> products = [
     Product(
-      id: 1,
+      id: '1',
       price: 59,
       title: "سماعات لاسلكية",
       subTitle: "جودة صوت عالية",
@@ -12,7 +18,7 @@ class ProductController extends GetxController {
       description: "لوريم ايبسوم دولار سيت أميت ,كونسيكتيتور أدايبا يسكينج أليايت,سيت دو أيوسمود تيمبور أنكايديديونتيوت لابوري ات دولار ماجنا أليكيوا.",
     ),
     Product(
-      id: 2,
+      id: '2',
       price: 1099,
       title: "جهاز موبايل",
       subTitle: "وأصبح للموبايل قوة",
@@ -20,7 +26,7 @@ class ProductController extends GetxController {
       description: "لوريم ايبسوم دولار سيت أميت ,كونسيكتيتور أدايبا يسكينج أليايت,سيت دو أيوسمود تيمبور أنكايديديونتيوت لابوري ات دولار ماجنا أليكيوا.",
     ),
     Product(
-      id: 3,
+      id: '3',
       price: 39,
       title: "نظارات ثلاثية الأبعاد",
       subTitle: "لنقلك للعالم الافتراضي",
@@ -28,7 +34,7 @@ class ProductController extends GetxController {
       description: "لوريم ايبسوم دولار سيت أميت ,كونسيكتيتور أدايبا يسكينج أليايت,سيت دو أيوسمود تيمبور أنكايديديونتيوت لابوري ات دولار ماجنا أليكيوا.",
     ),
     Product(
-      id: 4,
+      id: '4',
       price: 56,
       title: "سماعات",
       subTitle: "لساعات استماع طويلة",
@@ -36,7 +42,7 @@ class ProductController extends GetxController {
       description: "لوريم ايبسوم دولار سيت أميت ,كونسيكتيتور أدايبا يسكينج أليايت,سيت دو أيوسمود تيمبور أنكايديديونتيوت لابوري ات دولار ماجنا أليكيوا.",
     ),
     Product(
-      id: 5,
+      id: '5',
       price: 68,
       title: "مسجل صوت",
       subTitle: "سجل اللحظات المهمة حولك",
@@ -44,7 +50,7 @@ class ProductController extends GetxController {
       description: "لوريم ايبسوم دولار سيت أميت ,كونسيكتيتور أدايبا يسكينج أليايت,سيت دو أيوسمود تيمبور أنكايديديونتيوت لابوري ات دولار ماجنا أليكيوا.",
     ),
     Product(
-      id: 6,
+      id: '6',
       price: 39,
       title: "كاميرات كمبيوتر",
       subTitle: "بجودة ودقة صورة عالية",

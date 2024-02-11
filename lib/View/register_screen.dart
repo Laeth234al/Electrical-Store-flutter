@@ -105,39 +105,47 @@ class RegisterScreen extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 40.0),
-                      InkWell(
-                        child: Container(
-                          height: 50.0,
-                          margin: const EdgeInsets.symmetric(horizontal: 50.0),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(50.0),
-                            // color: Colors.blueAccent[700]!,
-                            gradient: const LinearGradient(
-                              begin: Alignment.topLeft,
-                              colors: [
-                                HelperColor.primaryColor,
-                                HelperColor.blueColor,
-                              ],
-                            ),
-                          ),
-                          child: const Center(
-                            child: Text(
-                              'Create Account',
-                              style: TextStyle(
-                                fontSize: 18.0,
-                                fontWeight: FontWeight.bold,
+                      GetBuilder<AuthController>(
+                        builder: (c) => c.isLoading
+                            ? const Center(child: CircularProgressIndicator())
+                            : InkWell(
+                                child: Container(
+                                  height: 50.0,
+                                  margin: const EdgeInsets.symmetric(horizontal: 50.0),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(50.0),
+                                    gradient: const LinearGradient(
+                                      begin: Alignment.topLeft,
+                                      colors: [
+                                        HelperColor.primaryColor,
+                                        HelperColor.blueColor,
+                                      ],
+                                    ),
+                                  ),
+                                  child: const Center(
+                                    child: Text(
+                                      'Create Account',
+                                      style: TextStyle(
+                                        fontSize: 18.0,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                onTap: () async {
+                                  print('Create Account');
+                                  if (authController.isVaildForRegister) {
+                                    print('valid for register');
+                                    c.changeLoading();
+                                    var v = await authController.register();
+                                    c.changeLoading();
+                                    print('ok');
+                                    if (v) Get.back();
+                                  } else {
+                                    print('not valid for register');
+                                  }
+                                },
                               ),
-                            ),
-                          ),
-                        ),
-                        onTap: () {
-                          print('Create Account');
-                          if (authController.isVaildForRegister)
-                            print('valid for register');
-                          else
-                            print('not valid for register');
-                          Get.back();
-                        },
                       ),
                       const SizedBox(height: 40.0),
                     ],
