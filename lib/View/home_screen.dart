@@ -47,6 +47,13 @@ class HomeScreen extends StatelessWidget {
               },
             ),
             DrawerItem(
+              title: 'المفضلة',
+              icon: Icons.favorite,
+              onTap: () {
+                print('favorite');
+              },
+            ),
+            DrawerItem(
               title: 'الأعدادات',
               icon: Icons.settings,
               onTap: () {
@@ -59,6 +66,34 @@ class HomeScreen extends StatelessWidget {
               onTap: () {
                 print('about');
               },
+            ),
+            // isManger or admin
+            FutureBuilder(
+              future: AuthServic.canAddData(),
+              builder: (context, snapshot) => Visibility(
+                visible: snapshot.data ?? false,
+                child: DrawerItem(
+                  title: 'إضافة بيانات',
+                  icon: Icons.add,
+                  onTap: () {
+                    print('add data');
+                  },
+                ),
+              ),
+            ),
+            // isManger
+            FutureBuilder(
+              future: AuthServic.canGivePermission(),
+              builder: (context, snapshot) => Visibility(
+                visible: snapshot.data ?? false,
+                child: DrawerItem(
+                  title: 'إعطاء صلاحية',
+                  icon: Icons.emoji_people,
+                  onTap: () {
+                    print('give permission');
+                  },
+                ),
+              ),
             ),
             DrawerItem(
               title: 'تسجيل الخروج',
