@@ -26,7 +26,7 @@ class AuthController extends GetxController {
 
   Future<bool> register() async {
     print('email : ${email.text} pass : ${password.text}');
-    var connection = await AuthServic.register(email: email.text, password: password.text);
+    var connection = await AuthServic.register(email: email.text, password: password.text, username: username.text);
     update();
     return connection;
     // sign up code

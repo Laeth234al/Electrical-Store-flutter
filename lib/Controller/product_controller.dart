@@ -1,11 +1,18 @@
 import 'package:get/get.dart';
 import 'package:store_app/Models/product.dart';
+import 'package:store_app/services/storage_service.dart';
 
 class ProductController extends GetxController {
   @override
-  void onInit() {
-    // firestor service
-    super.onInit();
+  Future<void> onReady() async {
+    print('pro controller1');
+    // await StorageService.getProducts();
+    // List<Product> _products = await StorageService.getProducts();
+    // print(_products.length);
+    products.addAll(await StorageService.getProducts());
+    print(products.length);
+    print('pro controller2');
+    update();
   }
 
   List<Product> products = [
@@ -16,6 +23,7 @@ class ProductController extends GetxController {
       subTitle: "جودة صوت عالية",
       image: "images/airpod.png",
       description: "لوريم ايبسوم دولار سيت أميت ,كونسيكتيتور أدايبا يسكينج أليايت,سيت دو أيوسمود تيمبور أنكايديديونتيوت لابوري ات دولار ماجنا أليكيوا.",
+      tags: [],
     ),
     Product(
       id: '2',
@@ -24,6 +32,7 @@ class ProductController extends GetxController {
       subTitle: "وأصبح للموبايل قوة",
       image: "images/mobile.png",
       description: "لوريم ايبسوم دولار سيت أميت ,كونسيكتيتور أدايبا يسكينج أليايت,سيت دو أيوسمود تيمبور أنكايديديونتيوت لابوري ات دولار ماجنا أليكيوا.",
+      tags: [],
     ),
     Product(
       id: '3',
@@ -32,6 +41,7 @@ class ProductController extends GetxController {
       subTitle: "لنقلك للعالم الافتراضي",
       image: "images/class.png",
       description: "لوريم ايبسوم دولار سيت أميت ,كونسيكتيتور أدايبا يسكينج أليايت,سيت دو أيوسمود تيمبور أنكايديديونتيوت لابوري ات دولار ماجنا أليكيوا.",
+      tags: [],
     ),
     Product(
       id: '4',
@@ -40,6 +50,7 @@ class ProductController extends GetxController {
       subTitle: "لساعات استماع طويلة",
       image: "images/headset.png",
       description: "لوريم ايبسوم دولار سيت أميت ,كونسيكتيتور أدايبا يسكينج أليايت,سيت دو أيوسمود تيمبور أنكايديديونتيوت لابوري ات دولار ماجنا أليكيوا.",
+      tags: [],
     ),
     Product(
       id: '5',
@@ -48,6 +59,7 @@ class ProductController extends GetxController {
       subTitle: "سجل اللحظات المهمة حولك",
       image: "images/speaker.png",
       description: "لوريم ايبسوم دولار سيت أميت ,كونسيكتيتور أدايبا يسكينج أليايت,سيت دو أيوسمود تيمبور أنكايديديونتيوت لابوري ات دولار ماجنا أليكيوا.",
+      tags: [],
     ),
     Product(
       id: '6',
@@ -56,6 +68,7 @@ class ProductController extends GetxController {
       subTitle: "بجودة ودقة صورة عالية",
       image: "images/camera.png",
       description: "لوريم ايبسوم دولار سيت أميت ,كونسيكتيتور أدايبا يسكينج أليايت,سيت دو أيوسمود تيمبور أنكايديديونتيوت لابوري ات دولار ماجنا أليكيوا.",
+      tags: [],
     ),
   ];
 }
