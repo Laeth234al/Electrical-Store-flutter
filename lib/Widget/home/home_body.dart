@@ -30,14 +30,16 @@ class HomeBody extends StatelessWidget {
                     ),
                   ),
                 ),
-                ListView.builder(
-                  itemCount: productController.products.length,
-                  itemBuilder: (context, index) => ProductCard(
-                    itemIndex: index,
-                    product: productController.products[index],
-                    press: () {
-                      Get.to(() => DetailsScreen(product: productController.products[index]));
-                    },
+                GetBuilder<ProductController>(
+                  builder: (c) => ListView.builder(
+                    itemCount: c.products.length,
+                    itemBuilder: (context, index) => ProductCard(
+                      itemIndex: index,
+                      product: c.products[index],
+                      press: () {
+                        Get.to(() => DetailsScreen(product: c.products[index]));
+                      },
+                    ),
                   ),
                 ),
               ],
