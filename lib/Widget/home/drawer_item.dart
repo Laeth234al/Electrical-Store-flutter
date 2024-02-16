@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:store_app/Helper/text_style_helper.dart';
 
 class DrawerItem extends StatelessWidget {
   const DrawerItem({
@@ -16,7 +17,9 @@ class DrawerItem extends StatelessWidget {
     return ListTile(
       title: Text(
         title,
-        style: const TextStyle(fontSize: 18.0),
+        style: HelperText.ts18f(),
+        overflow: TextOverflow.ellipsis,
+        maxLines: 1,
       ),
       leading: Icon(icon),
       onTap: onTap,

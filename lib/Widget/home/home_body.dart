@@ -7,8 +7,7 @@ import 'package:store_app/Widget/home/product_card.dart';
 import 'package:store_app/View/details_screen.dart';
 
 class HomeBody extends StatelessWidget {
-  HomeBody({super.key});
-  final ProductController productController = Get.find<ProductController>();
+  const HomeBody({super.key});
 
   @override
   Widget build(BuildContext context) {

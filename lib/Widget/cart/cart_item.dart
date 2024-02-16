@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:store_app/Helper/color_helper.dart';
 import 'package:store_app/Helper/padding_helper.dart';
+import 'package:store_app/Helper/text_style_helper.dart';
 import 'package:store_app/Models/cart.dart';
 import 'package:store_app/Widget/cart/item_button.dart';
 
@@ -9,12 +9,14 @@ class CartItem extends StatelessWidget {
     super.key,
     required this.cart,
     required this.onTapDelete,
-    required this.onTapCheckout,
+    required this.onTapDec,
+    required this.onTapInc,
   });
 
   final Cart cart;
   final void Function() onTapDelete;
-  final void Function() onTapCheckout;
+  final void Function() onTapInc;
+  final void Function() onTapDec;
 
   @override
   Widget build(BuildContext context) {
@@ -49,10 +51,19 @@ class CartItem extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: HelperPadding.defaultPadding),
               height: 144.0,
               width: 180.0,
-              child: Image.asset(
-                cart.product.image, // image
-                fit: BoxFit.cover,
-              ),
+              child: cart.product.image.startsWith('https://')
+                  ? Image.network(
+                      cart.product.image,
+                      height: size.width * 0.7,
+                      width: size.width * 0.7,
+                      fit: BoxFit.cover,
+                    )
+                  : Image.asset(
+                      cart.product.image,
+                      height: size.width * 0.7,
+                      width: size.width * 0.7,
+                      fit: BoxFit.cover,
+                    ),
             ),
           ),
           Positioned(
@@ -65,44 +76,48 @@ class CartItem extends StatelessWidget {
                 children: [
                   Text(
                     cart.product.title, // title
-                    style: const TextStyle(fontSize: 16.0),
+                    style: HelperText.ts16f(),
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
                   ),
                   const Spacer(),
-                  Container(
-                    padding: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 15.0),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5.0),
-                      color: HelperColor.secondaryColor,
-                    ),
-                    child: Column(
-                      children: [
-                        Text(
-                          'price : ${cart.product.price}\$', // price
-                          style: const TextStyle(fontSize: 16.0),
-                        ),
-                        Text(
-                          'quantity : ${cart.quantity}', // quantity
-                          style: const TextStyle(fontSize: 16.0),
-                        ),
-                      ],
-                    ),
+                  Text(
+                    'السعر : ${cart.product.price}\$', // price
+                    style: HelperText.ts14f(),
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
+                  ),
+                  Text(
+                    'الكمية : ${cart.quantity}', // quantity
+                    style: HelperText.ts14f(),
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
                   ),
                   const Spacer(),
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Spacer(),
+                      // const Spacer(flex: 2),
+                      CartItemButton(
+                        color: Colors.green,
+                        icon: Icons.add,
+                        onTap: onTapInc,
+                      ),
+                      // const Spacer(),
+                      const SizedBox(width: 18.0),
                       CartItemButton(
                         color: Colors.red,
                         icon: Icons.delete_outline_rounded,
                         onTap: onTapDelete,
                       ),
-                      const Spacer(),
+                      // const Spacer(),
+                      const SizedBox(width: 18.0),
                       CartItemButton(
                         color: Colors.green,
-                        icon: Icons.shopping_cart_checkout,
-                        onTap: onTapCheckout,
+                        icon: Icons.remove,
+                        onTap: onTapDec,
                       ),
-                      const Spacer(),
+                      // const Spacer(),
                     ],
                   ),
                   const Spacer(),

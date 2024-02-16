@@ -17,7 +17,11 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         elevation: 0.0,
         backgroundColor: HelperColor.primaryColor,
-        title: const Text('مرحبا بكم في متجر الألكترونيات'),
+        title: const Text(
+          'مرحبا بكم في متجر الألكترونيات',
+          overflow: TextOverflow.ellipsis,
+          maxLines: 1,
+        ),
       ),
       drawer: Drawer(
         child: ListView(
@@ -36,6 +40,8 @@ class HomeScreen extends StatelessWidget {
               child: Text(
                 'القائمة الرئيسية',
                 style: TextStyle(fontSize: 28.0),
+                overflow: TextOverflow.ellipsis,
+                maxLines: 1,
               ),
             ),
             DrawerItem(
@@ -51,20 +57,7 @@ class HomeScreen extends StatelessWidget {
               icon: Icons.favorite,
               onTap: () {
                 print('favorite');
-              },
-            ),
-            DrawerItem(
-              title: 'الأعدادات',
-              icon: Icons.settings,
-              onTap: () {
-                print('setting');
-              },
-            ),
-            DrawerItem(
-              title: 'حول',
-              icon: Icons.error,
-              onTap: () {
-                print('about');
+                Get.toNamed('/favo');
               },
             ),
             // isManger or admin
@@ -77,6 +70,7 @@ class HomeScreen extends StatelessWidget {
                   icon: Icons.add,
                   onTap: () {
                     print('add data');
+                    Get.toNamed('/addData');
                   },
                 ),
               ),
@@ -87,13 +81,30 @@ class HomeScreen extends StatelessWidget {
               builder: (context, snapshot) => Visibility(
                 visible: snapshot.data ?? false,
                 child: DrawerItem(
-                  title: 'إعطاء صلاحية',
+                  title: 'إدارة المستخدم',
                   icon: Icons.emoji_people,
                   onTap: () {
                     print('give permission');
+                    Get.toNamed('/userMange');
                   },
                 ),
               ),
+            ),
+            DrawerItem(
+              title: 'الأعدادات',
+              icon: Icons.settings,
+              onTap: () {
+                print('setting');
+                Get.toNamed('/setting');
+              },
+            ),
+            DrawerItem(
+              title: 'حول',
+              icon: Icons.error,
+              onTap: () {
+                print('about');
+                Get.toNamed('/about');
+              },
             ),
             DrawerItem(
               title: 'تسجيل الخروج',
@@ -108,7 +119,7 @@ class HomeScreen extends StatelessWidget {
           ],
         ),
       ),
-      body: HomeBody(),
+      body: const HomeBody(),
     );
   }
 }

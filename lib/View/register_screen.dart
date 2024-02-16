@@ -3,7 +3,8 @@ import 'package:get/get.dart';
 import 'package:store_app/Controller/auth_controller.dart';
 import 'package:store_app/Helper/color_helper.dart';
 import 'package:store_app/Helper/padding_helper.dart';
-import 'package:store_app/Widget/auth/auth_text_field.dart';
+import 'package:store_app/Helper/text_style_helper.dart';
+import 'package:store_app/Widget/custom_text_field.dart';
 
 class RegisterScreen extends StatelessWidget {
   RegisterScreen({super.key});
@@ -32,8 +33,18 @@ class RegisterScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('إنشاء حساب', style: TextStyle(fontSize: 30.0)),
-                  Text('أهلاً بك', style: TextStyle(fontSize: 20.0)),
+                  Text(
+                    'إنشاء حساب',
+                    style: TextStyle(fontSize: 30.0),
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
+                  ),
+                  Text(
+                    'أهلاً بك',
+                    style: TextStyle(fontSize: 20.0),
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
+                  ),
                 ],
               ),
             ),
@@ -72,7 +83,7 @@ class RegisterScreen extends StatelessWidget {
                               decoration: BoxDecoration(
                                 border: Border(bottom: BorderSide(color: Colors.grey[200]!)),
                               ),
-                              child: AuthTextField(
+                              child: CustomTextField(
                                 labelText: 'Username',
                                 hintText: 'username',
                                 icon: Icons.person,
@@ -83,7 +94,7 @@ class RegisterScreen extends StatelessWidget {
                               decoration: BoxDecoration(
                                 border: Border(bottom: BorderSide(color: Colors.grey[200]!)),
                               ),
-                              child: AuthTextField(
+                              child: CustomTextField(
                                 labelText: 'Email',
                                 hintText: 'example@ex.mp',
                                 icon: Icons.email,
@@ -94,7 +105,7 @@ class RegisterScreen extends StatelessWidget {
                               decoration: BoxDecoration(
                                 border: Border(bottom: BorderSide(color: Colors.grey[200]!)),
                               ),
-                              child: AuthTextField(
+                              child: CustomTextField(
                                 labelText: 'Password',
                                 hintText: '****',
                                 icon: Icons.password,
@@ -122,13 +133,12 @@ class RegisterScreen extends StatelessWidget {
                                       ],
                                     ),
                                   ),
-                                  child: const Center(
+                                  child: Center(
                                     child: Text(
                                       'Create Account',
-                                      style: TextStyle(
-                                        fontSize: 18.0,
-                                        fontWeight: FontWeight.bold,
-                                      ),
+                                      style: HelperText.ts18f(fontWeight: FontWeight.bold),
+                                      overflow: TextOverflow.ellipsis,
+                                      maxLines: 1,
                                     ),
                                   ),
                                 ),

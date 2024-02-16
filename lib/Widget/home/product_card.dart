@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:store_app/Helper/color_helper.dart';
 import 'package:store_app/Helper/padding_helper.dart';
+import 'package:store_app/Helper/text_style_helper.dart';
 import 'package:store_app/Models/product.dart';
 
 class ProductCard extends StatelessWidget {
@@ -47,15 +48,20 @@ class ProductCard extends StatelessWidget {
               top: 0.0,
               left: 0.0,
               child: Hero(
-                tag: '${product.id}',
+                tag: product.id,
                 child: Container(
                   padding: const EdgeInsets.symmetric(horizontal: HelperPadding.defaultPadding),
                   height: 144.0,
                   width: 180.0,
-                  child: Image.asset(
-                    product.image,
-                    fit: BoxFit.cover,
-                  ),
+                  child: product.image.startsWith('https://')
+                      ? Image.network(
+                          product.image,
+                          fit: BoxFit.cover,
+                        )
+                      : Image.asset(
+                          product.image,
+                          fit: BoxFit.cover,
+                        ),
                 ),
               ),
             ),
@@ -74,7 +80,9 @@ class ProductCard extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: HelperPadding.defaultPadding),
                       child: Text(
                         product.title,
-                        style: Theme.of(context).textTheme.bodyMedium,
+                        style: HelperText.ts14f(fontWeight: FontWeight.bold),
+                        textAlign: TextAlign.center,
+                        maxLines: 2,
                       ),
                     ),
                     const Spacer(),
@@ -82,7 +90,10 @@ class ProductCard extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: HelperPadding.defaultPadding),
                       child: Text(
                         product.subTitle,
-                        style: Theme.of(context).textTheme.bodySmall,
+                        style: HelperText.ts12f(),
+                        textAlign: TextAlign.center,
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 1,
                       ),
                     ),
                     const Spacer(),
@@ -97,7 +108,12 @@ class ProductCard extends StatelessWidget {
                           color: HelperColor.secondaryColor,
                           borderRadius: BorderRadius.circular(22.0),
                         ),
-                        child: Text('السعر: \$${product.price}'),
+                        child: Text(
+                          'السعر: \$${product.price}',
+                          style: HelperText.ts12f(),
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 1,
+                        ),
                       ),
                     ),
                   ],

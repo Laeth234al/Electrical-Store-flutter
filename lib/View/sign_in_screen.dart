@@ -5,7 +5,8 @@ import 'package:get/get.dart';
 import 'package:store_app/Controller/auth_controller.dart';
 import 'package:store_app/Helper/color_helper.dart';
 import 'package:store_app/Helper/padding_helper.dart';
-import 'package:store_app/Widget/auth/auth_text_field.dart';
+import 'package:store_app/Helper/text_style_helper.dart';
+import 'package:store_app/Widget/custom_text_field.dart';
 
 class SignInScreen extends StatelessWidget {
   SignInScreen({super.key});
@@ -33,8 +34,18 @@ class SignInScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('تسجيل الدخول', style: TextStyle(fontSize: 30.0)),
-                  Text('أهلا بك مجدداً', style: TextStyle(fontSize: 20.0)),
+                  Text(
+                    'تسجيل الدخول',
+                    style: TextStyle(fontSize: 30.0),
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
+                  ),
+                  Text(
+                    'أهلا بك مجدداً',
+                    style: TextStyle(fontSize: 20.0),
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
+                  ),
                 ],
               ),
             ),
@@ -73,7 +84,7 @@ class SignInScreen extends StatelessWidget {
                               decoration: BoxDecoration(
                                 border: Border(bottom: BorderSide(color: Colors.grey[200]!)),
                               ),
-                              child: AuthTextField(
+                              child: CustomTextField(
                                 labelText: 'Email',
                                 hintText: 'example@ex.mp',
                                 icon: Icons.email,
@@ -84,7 +95,7 @@ class SignInScreen extends StatelessWidget {
                               decoration: BoxDecoration(
                                 border: Border(bottom: BorderSide(color: Colors.grey[200]!)),
                               ),
-                              child: AuthTextField(
+                              child: CustomTextField(
                                 labelText: 'Password',
                                 hintText: '****',
                                 icon: Icons.password,
@@ -100,6 +111,8 @@ class SignInScreen extends StatelessWidget {
                           child: Text(
                             '?Forget Password',
                             style: TextStyle(color: Colors.grey),
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 1,
                           ),
                         ),
                         onTap: () {
@@ -124,13 +137,12 @@ class SignInScreen extends StatelessWidget {
                                       ],
                                     ),
                                   ),
-                                  child: const Center(
+                                  child: Center(
                                     child: Text(
                                       'Login',
-                                      style: TextStyle(
-                                        fontSize: 18.0,
-                                        fontWeight: FontWeight.bold,
-                                      ),
+                                      style: HelperText.ts18f(fontWeight: FontWeight.bold),
+                                      overflow: TextOverflow.ellipsis,
+                                      maxLines: 1,
                                     ),
                                   ),
                                 ),
@@ -153,6 +165,8 @@ class SignInScreen extends StatelessWidget {
                         child: Text(
                           'continue with another way',
                           style: TextStyle(color: Colors.grey),
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 1,
                         ),
                       ),
                       const SizedBox(height: 10.0),
@@ -165,14 +179,15 @@ class SignInScreen extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(50.0),
                                 color: Colors.black,
                               ),
-                              child: const Center(
+                              child: Center(
                                 child: Text(
                                   'Github',
-                                  style: TextStyle(
-                                    fontSize: 18.0,
+                                  style: HelperText.ts18f(
                                     fontWeight: FontWeight.bold,
                                     color: Colors.white,
                                   ),
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 1,
                                 ),
                               ),
                             ),
@@ -185,14 +200,15 @@ class SignInScreen extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(50.0),
                                 color: Colors.blue,
                               ),
-                              child: const Center(
+                              child: Center(
                                 child: Text(
                                   'Facebook',
-                                  style: TextStyle(
-                                    fontSize: 18.0,
+                                  style: HelperText.ts18f(
                                     fontWeight: FontWeight.bold,
                                     color: Colors.white,
                                   ),
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 1,
                                 ),
                               ),
                             ),
@@ -205,6 +221,8 @@ class SignInScreen extends StatelessWidget {
                           child: Text(
                             'doesn\'t have account create one',
                             style: TextStyle(color: Colors.grey),
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 1,
                           ),
                         ),
                         onTap: () {

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:store_app/Helper/color_helper.dart';
 import 'package:store_app/Helper/padding_helper.dart';
+import 'package:store_app/Helper/text_style_helper.dart';
 import 'package:store_app/Models/product.dart';
 import 'package:store_app/Widget/details/color_dot.dart';
 import 'package:store_app/Widget/details/product_image.dart';
@@ -42,7 +43,7 @@ class DetailsBody extends StatelessWidget {
                 children: [
                   Center(
                     child: Hero(
-                      tag: '${product.id}',
+                      tag: product.id,
                       child: ProductImage(
                         size: size,
                         image: product.image,
@@ -71,10 +72,7 @@ class DetailsBody extends StatelessWidget {
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: HelperPadding.defaultPadding / 2),
-                    child: Text(
-                      product.title,
-                      style: Theme.of(context).textTheme.titleMedium,
-                    ),
+                    child: Text(product.title, style: HelperText.ts14f(fontWeight: FontWeight.bold)),
                   ),
                   Text(
                     'السعر: \$${product.price}',
@@ -83,6 +81,8 @@ class DetailsBody extends StatelessWidget {
                       fontWeight: FontWeight.w600,
                       color: HelperColor.secondaryColor,
                     ),
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
                   ),
                   const SizedBox(height: HelperPadding.defaultPadding),
                 ],
@@ -96,10 +96,9 @@ class DetailsBody extends StatelessWidget {
               ),
               child: Text(
                 product.description,
-                style: const TextStyle(
-                  fontSize: 16.0,
-                  color: Colors.white,
-                ),
+                style: HelperText.ts16f(color: Colors.white),
+                overflow: TextOverflow.ellipsis,
+                maxLines: 8,
               ),
             )
           ],

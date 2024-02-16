@@ -6,10 +6,10 @@ class ProductController extends GetxController {
   @override
   Future<void> onReady() async {
     print('pro controller1');
-    // await StorageService.getProducts();
-    // List<Product> _products = await StorageService.getProducts();
-    // print(_products.length);
     products.addAll(await StorageService.getProducts());
+    for (var pro in products) {
+      print('id : ${pro.id}, title : ${pro.title}');
+    }
     print(products.length);
     print('pro controller2');
     update();
