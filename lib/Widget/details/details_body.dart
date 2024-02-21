@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:store_app/Helper/color_helper.dart';
-import 'package:store_app/Helper/padding_helper.dart';
-import 'package:store_app/Helper/text_style_helper.dart';
-import 'package:store_app/Models/product.dart';
-import 'package:store_app/Widget/details/color_dot.dart';
-import 'package:store_app/Widget/details/product_image.dart';
+import 'package:Electrical/Helper/color_helper.dart';
+import 'package:Electrical/Helper/padding_helper.dart';
+import 'package:Electrical/Helper/text_style_helper.dart';
+import 'package:Electrical/Models/product.dart';
+import 'package:Electrical/Widget/details/color_dot.dart';
+import 'package:Electrical/Widget/details/product_image.dart';
 
 class DetailsBody extends StatelessWidget {
-  const DetailsBody({super.key, required this.product});
+  const DetailsBody({super.key, required this.product, required this.page});
   final Product product;
+  final String page;
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +44,11 @@ class DetailsBody extends StatelessWidget {
                 children: [
                   Center(
                     child: Hero(
-                      tag: product.id,
+                      tag: page == 'home'
+                          ? product.id
+                          : page == 'favo'
+                              ? 'favo ${product.id}'
+                              : 'cart ${product.id}',
                       child: ProductImage(
                         size: size,
                         image: product.image,
@@ -72,14 +77,13 @@ class DetailsBody extends StatelessWidget {
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: HelperPadding.defaultPadding / 2),
-                    child: Text(product.title, style: HelperText.ts14f(fontWeight: FontWeight.bold)),
+                    child: Text(product.title, style: HelperText.ts16f(fontWeight: FontWeight.bold)),
                   ),
                   Text(
                     'السعر: \$${product.price}',
-                    style: const TextStyle(
-                      fontSize: 22.0,
-                      fontWeight: FontWeight.w600,
+                    style: HelperText.ts16f(
                       color: HelperColor.secondaryColor,
+                      fontWeight: FontWeight.w600,
                     ),
                     overflow: TextOverflow.ellipsis,
                     maxLines: 1,
@@ -96,7 +100,7 @@ class DetailsBody extends StatelessWidget {
               ),
               child: Text(
                 product.description,
-                style: HelperText.ts16f(color: Colors.white),
+                style: HelperText.ts12f(color: Colors.white),
                 overflow: TextOverflow.ellipsis,
                 maxLines: 8,
               ),

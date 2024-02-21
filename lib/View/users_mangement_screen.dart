@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:store_app/Helper/color_helper.dart';
-import 'package:store_app/Widget/user-mangment/user_listview.dart';
+import 'package:Electrical/Helper/color_helper.dart';
+import 'package:Electrical/Widget/user-mangment/user_listview.dart';
 
 class UsersMangementScreen extends StatelessWidget {
   const UsersMangementScreen({super.key});

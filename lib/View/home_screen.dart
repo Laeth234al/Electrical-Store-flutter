@@ -1,11 +1,12 @@
 // ignore_for_file: avoid_print
 
+import 'package:Electrical/Helper/text_style_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:store_app/Helper/color_helper.dart';
-import 'package:store_app/Widget/home/drawer_item.dart';
-import 'package:store_app/Widget/home/home_body.dart';
-import 'package:store_app/services/auth_service.dart';
+import 'package:Electrical/Helper/color_helper.dart';
+import 'package:Electrical/Widget/home/drawer_item.dart';
+import 'package:Electrical/Widget/home/home_body.dart';
+import 'package:Electrical/services/auth_service.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -17,8 +18,9 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         elevation: 0.0,
         backgroundColor: HelperColor.primaryColor,
-        title: const Text(
+        title: Text(
           'مرحبا بكم في متجر الألكترونيات',
+          style: HelperText.ts18f(),
           overflow: TextOverflow.ellipsis,
           maxLines: 1,
         ),
@@ -27,8 +29,8 @@ class HomeScreen extends StatelessWidget {
         child: ListView(
           padding: EdgeInsets.zero,
           children: [
-            const DrawerHeader(
-              decoration: BoxDecoration(
+            DrawerHeader(
+              decoration: const BoxDecoration(
                 gradient: LinearGradient(
                   begin: Alignment.topLeft,
                   colors: [
@@ -39,7 +41,7 @@ class HomeScreen extends StatelessWidget {
               ),
               child: Text(
                 'القائمة الرئيسية',
-                style: TextStyle(fontSize: 28.0),
+                style: HelperText.ts18f(),
                 overflow: TextOverflow.ellipsis,
                 maxLines: 1,
               ),

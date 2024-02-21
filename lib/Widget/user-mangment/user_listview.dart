@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:store_app/Controller/users_controller.dart';
-import 'package:store_app/Helper/text_style_helper.dart';
-import 'package:store_app/Widget/user-mangment/role_choese.dart';
+import 'package:Electrical/Controller/users_controller.dart';
+import 'package:Electrical/Helper/text_style_helper.dart';
+import 'package:Electrical/Widget/spinket_indecator.dart';
+import 'package:Electrical/Widget/user-mangment/role_choese.dart';
 
 class ViewUserList extends StatelessWidget {
   const ViewUserList({
@@ -12,9 +13,7 @@ class ViewUserList extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<UserController>(
       builder: (userController) => userController.isLoading
-          ? const Center(
-              child: CircularProgressIndicator(),
-            )
+          ? const SpinIndecator()
           : ListView.builder(
               itemCount: userController.users.length,
               itemBuilder: (context, index) {
@@ -34,8 +33,8 @@ class ViewUserList extends StatelessWidget {
                             Expanded(
                               child: Center(
                                 child: Text(
-                                  userController.users[index]['username'].toString(),
-                                  style: HelperText.ts18f(),
+                                  'أسم المستخدم : ${userController.users[index]['username']}',
+                                  style: HelperText.ts14f(),
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
                                 ),
@@ -45,8 +44,8 @@ class ViewUserList extends StatelessWidget {
                             Expanded(
                               child: Center(
                                 child: Text(
-                                  userController.users[index]['role'].toString(), // change after set as role and accepet on set to
-                                  style: HelperText.ts16f(),
+                                  'المنصب : ${userController.users[index]['role']}', // change after set as role and accepet on set to
+                                  style: HelperText.ts12f(),
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
                                 ),
@@ -60,7 +59,7 @@ class ViewUserList extends StatelessWidget {
                                   child: Column(
                                     children: [
                                       Text(
-                                        userController.users[index]['email'].toString(),
+                                        'البريد : ${userController.users[index]['email']}',
                                         overflow: TextOverflow.ellipsis,
                                         maxLines: 2,
                                       ),

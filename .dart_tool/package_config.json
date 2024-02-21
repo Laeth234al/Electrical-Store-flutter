@@ -470,13 +470,13 @@
       "languageVersion": "3.0"
     },
     {
-      "name": "store_app",
+      "name": "Electrical",
       "rootUri": "../",
       "packageUri": "lib/",
       "languageVersion": "3.1"
     }
   ],
-  "generated": "2024-02-16T10:21:18.578240Z",
+  "generated": "2024-02-21T19:34:17.167736Z",
   "generator": "pub",
   "generatorVersion": "3.2.3"
 }

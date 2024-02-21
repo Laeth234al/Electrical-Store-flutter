@@ -1,45 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:store_app/services/auth_service.dart';
-import 'package:store_app/services/storage_service.dart';
+import 'package:Electrical/services/auth_service.dart';
+import 'package:Electrical/services/storage_service.dart';
 
 class UserController extends GetxController {
   TextEditingController passwordOfManger = TextEditingController();
-
-  var users = <Map<String, dynamic>>[
-    // {'uid': '1', 'username': 'laeht 1', 'email': 'email11@gmail.com', 'role': 'manger'},
-    // {'uid': '2', 'username': 'laeht 2', 'email': 'email22@gmail.com', 'role': 'admin'},
-    // {'uid': '3', 'username': 'laeht 3', 'email': 'email33@gmail.com', 'role': 'admin'},
-    // {'uid': '4', 'username': 'laeht 4', 'email': 'email44@gmail.com', 'role': 'user'},
-    // {'uid': '5', 'username': 'laeht 5', 'email': 'email55@gmail.com', 'role': 'user'},
-    // {'uid': '6', 'username': 'laeht 6', 'email': 'email66@gmail.com', 'role': 'user'},
-    // {'uid': '7', 'username': 'laeht 7', 'email': 'email77@gmail.com', 'role': 'user'},
-    // {'uid': '8', 'username': 'laeht 8', 'email': 'email88@gmail.com', 'role': 'user'},
-    // {'uid': '9', 'username': 'laeht 9', 'email': 'email99@gmail.com', 'role': 'user'},
-    // {'uid': '10', 'username': 'laeht 10', 'email': 'email1010@gmail.com', 'role': 'user'},
-  ];
-
+  var users = <Map<String, dynamic>>[];
   List<String> roles = <String>[];
-
   var isExpanded = <bool>[];
+  bool _isLoading = false;
+  bool get isLoading => _isLoading;
 
-  bool isLoading = false;
-
-  void changeLoading() {
-    isLoading = !isLoading;
+  void _changeLoading() {
+    _isLoading = !_isLoading;
     update();
   }
 
   @override
   void onInit() async {
-    // get data and put in users list
-    // then
-    changeLoading();
+    _changeLoading();
     users = await StorageService.getUsers();
     isExpanded = List.generate(users.length, (_) => false);
     roles = users.map((e) => e['role'].toString()).toList();
     print(isExpanded);
-    changeLoading();
+    _changeLoading();
     super.onInit();
   }
 
@@ -67,12 +51,17 @@ class UserController extends GetxController {
     update();
   }
 
-  void setUserAs({required String role, required String uid}) async {
+  Future<void> setUserAs({required String role, required String uid}) async {
+    _changeLoading();
     await StorageService.setAsRole(role: role, uid: uid);
+    _changeLoading();
     update();
   }
 
   Future<bool> checkIfHeManger() async {
-    return await AuthServic.checkIfHeManger(password: passwordOfManger.text);
+    _changeLoading();
+    var connection = await AuthServic.checkIfHeManger(password: passwordOfManger.text);
+    _changeLoading();
+    return connection;
   }
 }

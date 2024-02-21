@@ -1,18 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:store_app/Helper/color_helper.dart';
-import 'package:store_app/Helper/padding_helper.dart';
-import 'package:store_app/Helper/text_style_helper.dart';
-import 'package:store_app/Models/product.dart';
+import 'package:Electrical/Helper/color_helper.dart';
+import 'package:Electrical/Helper/padding_helper.dart';
+import 'package:Electrical/Helper/text_style_helper.dart';
+import 'package:Electrical/Models/product.dart';
 
 class ProductCard extends StatelessWidget {
   const ProductCard({
     super.key,
-    required this.itemIndex,
     required this.product,
     required this.press,
   });
 
-  final int itemIndex;
   final Product product;
   final void Function() press;
 
@@ -53,15 +51,10 @@ class ProductCard extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: HelperPadding.defaultPadding),
                   height: 144.0,
                   width: 180.0,
-                  child: product.image.startsWith('https://')
-                      ? Image.network(
-                          product.image,
-                          fit: BoxFit.cover,
-                        )
-                      : Image.asset(
-                          product.image,
-                          fit: BoxFit.cover,
-                        ),
+                  child: Image.network(
+                    product.image,
+                    fit: BoxFit.contain,
+                  ),
                 ),
               ),
             ),

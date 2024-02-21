@@ -15,16 +15,16 @@ class CartItemButton extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Container(
-        height: 40.0,
-        width: 40.0,
+        height: 25.0,
+        width: 25.0,
         decoration: BoxDecoration(
           color: color,
-          borderRadius: BorderRadius.circular(10.0),
+          borderRadius: BorderRadius.circular(5.0),
         ),
         child: Icon(
           icon,
           color: Colors.white,
-          size: 20.0,
+          size: 15.0,
         ),
       ),
     );

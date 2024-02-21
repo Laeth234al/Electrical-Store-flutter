@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:store_app/Helper/color_helper.dart';
-import 'package:store_app/Widget/addData/add_data_form.dart';
+import 'package:Electrical/Helper/color_helper.dart';
+import 'package:Electrical/Widget/addData/add_data_form.dart';
 
 class AddDataScreen extends StatelessWidget {
   const AddDataScreen({super.key});

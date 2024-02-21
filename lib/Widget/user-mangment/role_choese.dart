@@ -1,9 +1,10 @@
+import 'package:Electrical/Widget/user-mangment/dialog_uncorrect_password.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:store_app/Controller/users_controller.dart';
-import 'package:store_app/Helper/color_helper.dart';
-import 'package:store_app/Helper/text_style_helper.dart';
-import 'package:store_app/Widget/custom_text_field.dart';
+import 'package:Electrical/Controller/users_controller.dart';
+import 'package:Electrical/Helper/color_helper.dart';
+import 'package:Electrical/Helper/text_style_helper.dart';
+import 'package:Electrical/Widget/custom_text_field.dart';
 
 class RoleChoese extends StatelessWidget {
   const RoleChoese({
@@ -25,7 +26,10 @@ class RoleChoese extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('set as $value'),
+            Text(
+              'تعيين ك $value',
+              style: HelperText.ts12f(),
+            ),
             const SizedBox(width: 12.0),
             Radio(
               value: value,
@@ -60,12 +64,12 @@ class RoleChoese extends StatelessWidget {
                         mainAxisSize: MainAxisSize.min,
                         children: <Widget>[
                           Text(
-                            'Save',
+                            'حفظ',
                             style: HelperText.ts18f(fontWeight: FontWeight.bold),
                           ),
                           const SizedBox(height: 8.0),
                           Text(
-                            'Are you sure you want to set "$username" as a $value',
+                            "هل انت متأكد من تعيين $username ك $value",
                             style: HelperText.ts16f(),
                             textAlign: TextAlign.center,
                           ),
@@ -78,7 +82,7 @@ class RoleChoese extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(10.0),
                               ),
                               child: CustomTextField(
-                                labelText: 'Your password',
+                                labelText: 'أدخل كلمة المرور',
                                 hintText: '****',
                                 controller: controller.passwordOfManger,
                                 isPassword: true,
@@ -95,27 +99,28 @@ class RoleChoese extends StatelessWidget {
                                   if (value == 'manger') {
                                     bool isManger = await controller.checkIfHeManger();
                                     if (isManger) {
-                                      controller.toggleRoles(index: index, role: value);
                                       Get.back();
+                                      await controller.setUserAs(role: value, uid: uid);
+                                      controller.toggleRoles(index: index, role: value);
                                     } else {
                                       Get.back();
                                       Get.dialog(const PasswordNotCorrectDialog());
                                     }
                                   } else {
-                                    controller.setUserAs(role: value, uid: uid);
-                                    controller.toggleRoles(index: index, role: value);
                                     Get.back();
+                                    await controller.setUserAs(role: value, uid: uid);
+                                    controller.toggleRoles(index: index, role: value);
                                   }
                                   controller.passwordOfManger.text = "";
                                 },
-                                child: const Text('Save'),
+                                child: const Text('حفظ'),
                               ),
                               ElevatedButton(
                                 onPressed: () {
                                   controller.passwordOfManger.text = "";
                                   Get.back();
                                 },
-                                child: const Text('Close'),
+                                child: const Text('إغلاق'),
                               ),
                             ],
                           ),
@@ -125,61 +130,6 @@ class RoleChoese extends StatelessWidget {
                   ),
                 );
               },
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class PasswordNotCorrectDialog extends StatelessWidget {
-  const PasswordNotCorrectDialog({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Dialog(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16.0),
-      ),
-      elevation: 0.0,
-      backgroundColor: Colors.transparent,
-      child: Container(
-        padding: const EdgeInsets.all(16.0),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(16.0),
-          gradient: const LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [
-              HelperColor.primaryColor,
-              HelperColor.blueColor,
-            ],
-          ),
-        ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            Text(
-              'Not correct',
-              style: HelperText.ts18f(fontWeight: FontWeight.bold),
-              overflow: TextOverflow.ellipsis,
-              maxLines: 1,
-            ),
-            const SizedBox(height: 8.0),
-            const Text(
-              'The password you insert is not correct',
-              style: TextStyle(fontSize: 16.0),
-              textAlign: TextAlign.center,
-              overflow: TextOverflow.ellipsis,
-              maxLines: 2,
-            ),
-            const SizedBox(height: 16.0),
-            ElevatedButton(
-              onPressed: () {
-                Get.back();
-              },
-              child: const Text('Close'),
             ),
           ],
         ),

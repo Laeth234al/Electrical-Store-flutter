@@ -1,5 +1,6 @@
+import 'package:Electrical/Helper/text_style_helper.dart';
 import 'package:flutter/material.dart';
-import 'package:store_app/Helper/color_helper.dart';
+import 'package:Electrical/Helper/color_helper.dart';
 
 class AboutScreen extends StatelessWidget {
   const AboutScreen({super.key});
@@ -34,23 +35,26 @@ class AboutScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
-                    height: 200.0,
-                    width: 200.0,
-                    color: Colors.red,
-                    // app icon
-                  ),
-                  const Text(
-                    'app name : electrial-store',
-                    style: TextStyle(
-                      fontSize: 20.0,
-                      fontWeight: FontWeight.bold,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(50.0),
+                    ),
+                    clipBehavior: Clip.antiAliasWithSaveLayer,
+                    child: CircleAvatar(
+                      maxRadius: 100.0,
+                      child: Image.asset(
+                        'images/electrical_store.png',
+                      ),
                     ),
                   ),
-                  const Text(
-                    'Version : 1.0.0v',
-                    style: TextStyle(
-                      fontSize: 18.0,
-                    ),
+                  const SizedBox(height: 20.0),
+                  Text(
+                    'أسم التطبيق : Electrial Store',
+                    style: HelperText.ts16f(fontWeight: FontWeight.w700),
+                  ),
+                  const SizedBox(height: 10.0),
+                  Text(
+                    'الأصدار : 1.0.0v',
+                    style: HelperText.ts14f(),
                   ),
                 ],
               ),

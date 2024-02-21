@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:store_app/Helper/text_style_helper.dart';
+import 'package:Electrical/Helper/text_style_helper.dart';
 
 class CustomTextField extends StatelessWidget {
   const CustomTextField({
@@ -59,6 +59,7 @@ class CustomTextField extends StatelessWidget {
         },
         controller: controller,
         decoration: InputDecoration(
+          // enabled: false,
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(4.0),
             borderSide: const BorderSide(width: 1.0),
@@ -67,9 +68,9 @@ class CustomTextField extends StatelessWidget {
           focusedBorder: outlineInputBorder,
           enabledBorder: outlineInputBorder,
           labelText: labelText,
-          labelStyle: HelperText.ts18f(),
+          labelStyle: HelperText.ts14f(),
           hintText: hintText,
-          hintStyle: HelperText.ts14f(),
+          hintStyle: HelperText.ts12f(),
           prefixIcon: icon == null
               ? null
               : Icon(

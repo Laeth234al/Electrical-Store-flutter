@@ -1,10 +1,14 @@
+// ignore_for_file: avoid_print
+
+import 'package:Electrical/Widget/custom_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:store_app/Controller/auth_controller.dart';
-import 'package:store_app/Helper/color_helper.dart';
-import 'package:store_app/Helper/padding_helper.dart';
-import 'package:store_app/Helper/text_style_helper.dart';
-import 'package:store_app/Widget/custom_text_field.dart';
+import 'package:Electrical/Controller/auth_controller.dart';
+import 'package:Electrical/Helper/color_helper.dart';
+import 'package:Electrical/Helper/padding_helper.dart';
+import 'package:Electrical/Helper/text_style_helper.dart';
+import 'package:Electrical/Widget/custom_text_field.dart';
+import 'package:Electrical/Widget/spinket_indecator.dart';
 
 class RegisterScreen extends StatelessWidget {
   RegisterScreen({super.key});
@@ -58,14 +62,12 @@ class RegisterScreen extends StatelessWidget {
                   ),
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.all(HelperPadding.defaultPadding * (3 / 2)),
+                  padding: const EdgeInsets.all(HelperPadding.defaultPadding),
                   child: ListView(
                     padding: EdgeInsets.zero,
-                    physics: const NeverScrollableScrollPhysics(),
                     children: [
-                      const SizedBox(height: 40.0),
+                      const SizedBox(height: 10.0),
                       Container(
-                        //padding: const EdgeInsets.all(20.0),
                         decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(10.0),
@@ -84,8 +86,8 @@ class RegisterScreen extends StatelessWidget {
                                 border: Border(bottom: BorderSide(color: Colors.grey[200]!)),
                               ),
                               child: CustomTextField(
-                                labelText: 'Username',
-                                hintText: 'username',
+                                labelText: 'أسم المستخدم',
+                                hintText: 'جاسم بن عبد الرحمن',
                                 icon: Icons.person,
                                 controller: authController.username,
                               ),
@@ -95,7 +97,7 @@ class RegisterScreen extends StatelessWidget {
                                 border: Border(bottom: BorderSide(color: Colors.grey[200]!)),
                               ),
                               child: CustomTextField(
-                                labelText: 'Email',
+                                labelText: 'البريد الألكتروني',
                                 hintText: 'example@ex.mp',
                                 icon: Icons.email,
                                 controller: authController.email,
@@ -106,7 +108,7 @@ class RegisterScreen extends StatelessWidget {
                                 border: Border(bottom: BorderSide(color: Colors.grey[200]!)),
                               ),
                               child: CustomTextField(
-                                labelText: 'Password',
+                                labelText: 'كلمة المرور',
                                 hintText: '****',
                                 icon: Icons.password,
                                 controller: authController.password,
@@ -118,7 +120,7 @@ class RegisterScreen extends StatelessWidget {
                       const SizedBox(height: 40.0),
                       GetBuilder<AuthController>(
                         builder: (c) => c.isLoading
-                            ? const Center(child: CircularProgressIndicator())
+                            ? const SpinIndecator()
                             : InkWell(
                                 child: Container(
                                   height: 50.0,
@@ -135,8 +137,8 @@ class RegisterScreen extends StatelessWidget {
                                   ),
                                   child: Center(
                                     child: Text(
-                                      'Create Account',
-                                      style: HelperText.ts18f(fontWeight: FontWeight.bold),
+                                      'إنشاء حساب',
+                                      style: HelperText.ts14f(fontWeight: FontWeight.bold),
                                       overflow: TextOverflow.ellipsis,
                                       maxLines: 1,
                                     ),
@@ -146,13 +148,33 @@ class RegisterScreen extends StatelessWidget {
                                   print('Create Account');
                                   if (authController.isVaildForRegister) {
                                     print('valid for register');
-                                    c.changeLoading();
                                     var v = await authController.register();
-                                    c.changeLoading();
                                     print('ok');
-                                    if (v) Get.back();
+                                    if (v == 'done') {
+                                      Get.back();
+                                      Get.dialog(const CustomDialog(title: 'أنشاء حساب', subtitle: "تم أنشاء الحساب بنجاح"));
+                                    } else if (v == 'weak-password') {
+                                      Get.dialog(const CustomDialog(
+                                        title: 'كلمة المرور ضعيفة',
+                                        subtitle: 'يبدو أن كلمة المرور التي أدخلتها ضعيفة للغاية',
+                                      ));
+                                    } else if (v == 'email-already-in-use') {
+                                      Get.dialog(const CustomDialog(
+                                        title: 'الحساب مستخدم بالفعل',
+                                        subtitle: 'يبدو أن هذا الحساب مستخدم بالفعل',
+                                      ));
+                                    } else {
+                                      Get.dialog(const CustomDialog(
+                                        title: 'المعلومات غير صحيحة',
+                                        subtitle: 'الرجاء ملئ الحقول المطلوبة بالمعلومات الصحيحة',
+                                      ));
+                                    }
                                   } else {
                                     print('not valid for register');
+                                    Get.dialog(const CustomDialog(
+                                      title: 'المعلومات غير صحيحة',
+                                      subtitle: 'الرجاء ملئ الحقول المطلوبة بالمعلومات الصحيحة',
+                                    ));
                                   }
                                 },
                               ),

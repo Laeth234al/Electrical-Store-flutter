@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:store_app/Controller/product_controller.dart';
-import 'package:store_app/Helper/color_helper.dart';
-import 'package:store_app/Helper/padding_helper.dart';
-import 'package:store_app/Widget/home/product_card.dart';
-import 'package:store_app/View/details_screen.dart';
+import 'package:Electrical/Controller/product_controller.dart';
+import 'package:Electrical/Helper/color_helper.dart';
+import 'package:Electrical/Helper/padding_helper.dart';
+import 'package:Electrical/Widget/home/product_card.dart';
+import 'package:Electrical/View/details_screen.dart';
+import 'package:Electrical/Widget/spinket_indecator.dart';
 
 class HomeBody extends StatelessWidget {
   const HomeBody({super.key});
@@ -30,16 +31,22 @@ class HomeBody extends StatelessWidget {
                   ),
                 ),
                 GetBuilder<ProductController>(
-                  builder: (c) => ListView.builder(
-                    itemCount: c.products.length,
-                    itemBuilder: (context, index) => ProductCard(
-                      itemIndex: index,
-                      product: c.products[index],
-                      press: () {
-                        Get.to(() => DetailsScreen(product: c.products[index]));
-                      },
-                    ),
-                  ),
+                  builder: (c) => c.isLoading
+                      ? const SpinIndecator()
+                      : ListView.builder(
+                          itemCount: c.filtered.length,
+                          itemBuilder: (context, index) => ProductCard(
+                            product: c.filtered[index],
+                            press: () {
+                              Get.to(
+                                () => DetailsScreen(
+                                  product: c.filtered[index],
+                                  page: 'home',
+                                ),
+                              );
+                            },
+                          ),
+                        ),
                 ),
               ],
             ),

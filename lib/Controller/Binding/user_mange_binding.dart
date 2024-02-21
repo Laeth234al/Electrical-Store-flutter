@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:store_app/Controller/users_controller.dart';
+import 'package:Electrical/Controller/users_controller.dart';
 
 class UserBinding extends Bindings {
   @override

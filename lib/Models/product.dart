@@ -31,4 +31,13 @@ class Product {
         "image": image,
         "tags": List<dynamic>.from(tags.map((x) => x)),
       };
+  Map<String, dynamic> toJson2() => {
+        "id": id,
+        "price": price,
+        "title": title,
+        "subTitle": subTitle,
+        "description": description,
+        "image": image,
+        "tags": List<dynamic>.from(tags.map((x) => x)),
+      };
 }

@@ -1,31 +1,29 @@
+import 'package:Electrical/View/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:store_app/Controller/Binding/auth_binding.dart';
-import 'package:store_app/Controller/Binding/home_binding.dart';
-import 'package:store_app/Controller/Binding/user_mange_binding.dart';
-import 'package:store_app/Helper/color_helper.dart';
-import 'package:store_app/View/about_screen.dart';
-import 'package:store_app/View/add_data_screen.dart';
-import 'package:store_app/View/cart_screen.dart';
-import 'package:store_app/View/favorite_screen.dart';
-import 'package:store_app/View/home_screen.dart';
-import 'package:store_app/View/register_screen.dart';
-import 'package:store_app/View/setting_screen.dart';
-import 'package:store_app/View/sign_in_screen.dart';
-import 'package:store_app/View/users_mangement_screen.dart';
-import 'package:store_app/firebase_options.dart';
+import 'package:Electrical/Controller/Binding/auth_binding.dart';
+import 'package:Electrical/Controller/Binding/home_binding.dart';
+import 'package:Electrical/Controller/Binding/user_mange_binding.dart';
+import 'package:Electrical/Helper/color_helper.dart';
+import 'package:Electrical/View/about_screen.dart';
+import 'package:Electrical/View/add_data_screen.dart';
+import 'package:Electrical/View/cart_screen.dart';
+import 'package:Electrical/View/favorite_screen.dart';
+import 'package:Electrical/View/home_screen.dart';
+import 'package:Electrical/View/register_screen.dart';
+import 'package:Electrical/View/setting_screen.dart';
+import 'package:Electrical/View/sign_in_screen.dart';
+import 'package:Electrical/View/users_mangement_screen.dart';
+import 'package:Electrical/firebase_options.dart';
 // ignore: depend_on_referenced_packages
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:store_app/services/auth_service.dart';
 
-late bool isLogin;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  isLogin = await AuthServic.isLogin();
   runApp(const StoreApp());
 }
 
@@ -49,8 +47,9 @@ class StoreApp extends StatelessWidget {
       ],
       supportedLocales: const [Locale("ar", "AE")],
       locale: const Locale("ar", "AE"),
-      initialRoute: isLogin ? '/home' : '/',
+      initialRoute: '/splash',
       getPages: [
+        GetPage(name: '/splash', page: () => const SplashScreen()),
         GetPage(name: '/', page: () => SignInScreen(), binding: AuthBinding()),
         GetPage(name: '/register', page: () => RegisterScreen(), binding: AuthBinding()),
         GetPage(name: '/home', page: () => const HomeScreen(), binding: HomeBinding()),

@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
-import 'package:store_app/Controller/cart_controller.dart';
-import 'package:store_app/Controller/favorite_controller.dart';
-import 'package:store_app/Controller/product_controller.dart';
+import 'package:Electrical/Controller/cart_controller.dart';
+import 'package:Electrical/Controller/favorite_controller.dart';
+import 'package:Electrical/Controller/product_controller.dart';
 
 class HomeBinding implements Bindings {
   @override

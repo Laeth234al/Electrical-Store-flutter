@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:store_app/Helper/color_helper.dart';
+import 'package:Electrical/Helper/color_helper.dart';
 
 class PickImageButton extends StatelessWidget {
   const PickImageButton({

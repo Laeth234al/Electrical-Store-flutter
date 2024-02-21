@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:store_app/Helper/color_helper.dart';
-import 'package:store_app/Helper/padding_helper.dart';
+import 'package:Electrical/Helper/color_helper.dart';
+import 'package:Electrical/Helper/padding_helper.dart';
 
 class ColorDot extends StatelessWidget {
   const ColorDot({

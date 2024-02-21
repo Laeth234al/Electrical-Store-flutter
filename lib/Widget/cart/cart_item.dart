@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:store_app/Helper/padding_helper.dart';
-import 'package:store_app/Helper/text_style_helper.dart';
-import 'package:store_app/Models/cart.dart';
-import 'package:store_app/Widget/cart/item_button.dart';
+import 'package:Electrical/Helper/padding_helper.dart';
+import 'package:Electrical/Helper/text_style_helper.dart';
+import 'package:Electrical/Models/cart.dart';
+import 'package:Electrical/Widget/cart/item_button.dart';
 
 class CartItem extends StatelessWidget {
   const CartItem({
@@ -51,19 +51,15 @@ class CartItem extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: HelperPadding.defaultPadding),
               height: 144.0,
               width: 180.0,
-              child: cart.product.image.startsWith('https://')
-                  ? Image.network(
-                      cart.product.image,
-                      height: size.width * 0.7,
-                      width: size.width * 0.7,
-                      fit: BoxFit.cover,
-                    )
-                  : Image.asset(
-                      cart.product.image,
-                      height: size.width * 0.7,
-                      width: size.width * 0.7,
-                      fit: BoxFit.cover,
-                    ),
+              child: Hero(
+                tag: 'cart ${cart.product.id}',
+                child: Image.network(
+                  cart.product.image,
+                  height: size.width * 0.7,
+                  width: size.width * 0.7,
+                  fit: BoxFit.cover,
+                ),
+              ),
             ),
           ),
           Positioned(
@@ -76,20 +72,21 @@ class CartItem extends StatelessWidget {
                 children: [
                   Text(
                     cart.product.title, // title
-                    style: HelperText.ts16f(),
+                    style: HelperText.ts14f(),
                     overflow: TextOverflow.ellipsis,
-                    maxLines: 1,
+                    maxLines: 2,
+                    textAlign: TextAlign.center,
                   ),
                   const Spacer(),
                   Text(
                     'السعر : ${cart.product.price}\$', // price
-                    style: HelperText.ts14f(),
+                    style: HelperText.ts12f(),
                     overflow: TextOverflow.ellipsis,
                     maxLines: 1,
                   ),
                   Text(
                     'الكمية : ${cart.quantity}', // quantity
-                    style: HelperText.ts14f(),
+                    style: HelperText.ts12f(),
                     overflow: TextOverflow.ellipsis,
                     maxLines: 1,
                   ),
@@ -97,27 +94,23 @@ class CartItem extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      // const Spacer(flex: 2),
                       CartItemButton(
                         color: Colors.green,
                         icon: Icons.add,
                         onTap: onTapInc,
                       ),
-                      // const Spacer(),
                       const SizedBox(width: 18.0),
                       CartItemButton(
                         color: Colors.red,
                         icon: Icons.delete_outline_rounded,
                         onTap: onTapDelete,
                       ),
-                      // const Spacer(),
                       const SizedBox(width: 18.0),
                       CartItemButton(
                         color: Colors.green,
                         icon: Icons.remove,
                         onTap: onTapDec,
                       ),
-                      // const Spacer(),
                     ],
                   ),
                   const Spacer(),

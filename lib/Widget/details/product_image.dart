@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:store_app/Helper/padding_helper.dart';
+import 'package:Electrical/Helper/padding_helper.dart';
 
 class ProductImage extends StatelessWidget {
   const ProductImage({
@@ -27,19 +27,12 @@ class ProductImage extends StatelessWidget {
               shape: BoxShape.circle,
             ),
           ),
-          image.startsWith('https://')
-              ? Image.network(
-                  image,
-                  height: size.width * 0.7,
-                  width: size.width * 0.7,
-                  fit: BoxFit.cover,
-                )
-              : Image.asset(
-                  image,
-                  height: size.width * 0.7,
-                  width: size.width * 0.7,
-                  fit: BoxFit.cover,
-                ),
+          Image.network(
+            image,
+            height: size.width * 0.7,
+            width: size.width * 0.7,
+            fit: BoxFit.cover,
+          ),
         ],
       ),
     );

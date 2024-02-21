@@ -1,21 +1,28 @@
 import 'package:get/get.dart';
-import 'package:store_app/Models/product.dart';
+import 'package:Electrical/Models/product.dart';
+import 'package:Electrical/services/storage_service.dart';
 
 class FavoriteController extends GetxController {
-  List<Product> favorite = [
-    // ...List.generate(
-    //   20,
-    //   (index) => Product(
-    //     id: index.toString(),
-    //     price: 100.0 * index,
-    //     title: 'title $index',
-    //     subTitle: 'subTitle $index',
-    //     description: 'description $index',
-    //     image: 'image $index',
-    //     tags: [],
-    //   ),
-    // ),
-  ];
+  List<Product> favorite = [];
+
+  bool _isLoading = false;
+
+  @override
+  void onInit() async {
+    super.onInit();
+    _toggleLoading();
+    favorite = await StorageService.getFavoritesProducts;
+    _toggleLoading();
+    update();
+  }
+
+  bool get isLoading => _isLoading;
+
+  void _toggleLoading() {
+    _isLoading = !_isLoading;
+    update();
+  }
+
   // is add before
   bool isAddIn(String productId) {
     for (var product in favorite) {
@@ -29,14 +36,22 @@ class FavoriteController extends GetxController {
   }
 
   // add in
-  void addToFavo(Product product) {
+  void addToFavo(Product product) async {
+    _toggleLoading();
     favorite.add(product);
-    update();
+    // add to firestore
+    await StorageService.uploadFavorites(favorite);
+    _toggleLoading();
   }
 
   // remove form
-  void removeFromFavo(Product product) {
-    favorite.remove(product);
-    update();
+  void removeFromFavo(Product product) async {
+    _toggleLoading();
+    favorite.remove(
+      favorite.firstWhere((element) => element.id == product.id),
+    );
+    // remove from firestore
+    await StorageService.uploadFavorites(favorite);
+    _toggleLoading();
   }
 }
